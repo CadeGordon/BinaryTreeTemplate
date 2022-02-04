@@ -55,6 +55,7 @@ private:
 template<typename T>
 inline BinaryTree<T>::BinaryTree()
 {
+	m_root = nullptr;
 }
 
 template<typename T>
@@ -65,17 +66,48 @@ inline BinaryTree<T>::~BinaryTree()
 template<typename T>
 inline bool BinaryTree<T>::isEmpty() const
 {
-	return false;
+	if (m_root == nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 template<typename T>
 inline void BinaryTree<T>::insert(T value)
 {
+	TreeNode<T>* newNode = new TreeNode<T>(value);
+	TreeNode<T>* tempNode = m_root;
+
+	if (m_root == nullptr)
+	{
+		m_root = newNode;
+		return;
+	}
+
+	while (tempNode != nullptr)
+	{
+		if (tempNode->getData() < value)
+			tempNode = tempNode->getLeft();
+		else
+			(tempNode = tempNode->getRight());
+	}
+
+	tempNode = newNode;
 }
 
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
+}
+
+template<typename T>
+inline void BinaryTree<T>::draw(TreeNode<T>* selected)
+{
+	draw(m_root, 400, 40, 400, selected);
 }
 
 template<typename T>
@@ -108,10 +140,10 @@ inline void BinaryTree<T>::draw(TreeNode<T>* currentNode, int x, int y, int hori
 			//draws a line between this child and the curent code
 			DrawLine(x, y, x + horizontalSpacing, y + 80, RED);
 			//draws the right child
-			draw(currentNode->getright(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
+			draw(currentNode->getRight(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
 		}
 		//draws the current node
-		currentNode->draw(x, y, x(selected == currentNode));
+		currentNode->draw(x, y, (selected == currentNode));
 
 	}
 }
