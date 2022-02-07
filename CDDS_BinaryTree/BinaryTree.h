@@ -31,7 +31,7 @@ public:
 	/// Finds and returns a node with the given value in the tree
 	/// </summary>
 	/// <param name="value">The value of the node to search for</param>
-	TreeNode<T>* find(T value) {return nullptr;}
+	TreeNode<T>* find(T value);
 
 	void draw(TreeNode<T>* selected = nullptr);
 
@@ -116,6 +116,16 @@ inline void BinaryTree<T>::insert(T value)
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
+}
+
+template<typename T>
+inline TreeNode<T>* BinaryTree<T>::find(T value)
+{
+	if (value == NULL)
+		return nullptr;
+
+
+		
 }
 
 template<typename T>

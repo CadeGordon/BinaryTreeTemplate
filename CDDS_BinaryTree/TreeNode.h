@@ -131,12 +131,12 @@ inline void TreeNode<T>::draw(int x, int y, bool selected)
 	sprintf(buffer, "%d", m_value);
 
 	//Draws the circle to represnet the node
-	DrawCircle(x, y, 30, YELLOW);
+	DrawCircle(x, y, 30, BLACK);
 
 	//If the node is current selcevted node change its color
 	if (selected)
 		DrawCircle(x, y, 28, GREEN);
-	DrawCircle(x, y, 28, BLACK);
+	DrawCircle(x, y, 28, PINK);
 
 	//Draw the value of the node inside its circle
 	DrawText(buffer, x - 12, y - 12, 12, WHITE);
