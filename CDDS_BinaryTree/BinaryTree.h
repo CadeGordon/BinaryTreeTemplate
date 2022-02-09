@@ -118,6 +118,60 @@ inline void BinaryTree<T>::insert(T value)
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
+	TreeNode<T>* currentNode = nullptr;
+	TreeNode<T>* currentNodeParent = nullptr;
+	if (findNode(value, currentNode, currentNodeParent)) {
+		
+		if (!(currentNode->hasLeft() || currentNode->hasRight())) {
+			if (!currentNodeParent)
+				m_root = nullptr;
+			else if (currentNodeParent->getLeft() == currentNode)
+				currentNodeParent->setLeft(nullptr);
+			else if (currentNodeParent->getRight() == currentNode)
+				currentNodeParent->setRight(nullptr);
+			delete currentNode;
+		}
+
+		
+		else if (currentNode->hasLeft() && currentNode->hasRight()) {
+			TreeNode<T>* nodeToDelete = currentNode->getRight();
+			TreeNode<T>* nodeToDeleteParent = new TreeNode<T>();
+			while (nodeToDelete->hasLeft()) {
+				nodeToDeleteParent = nodeToDelete;
+				nodeToDelete = nodeToDelete->getLeft();
+			}
+
+			currentNode->setData(nodeToDelete->getData());
+			delete nodeToDelete;
+			return;
+		}
+
+		
+		else if (!currentNodeParent && currentNode->hasRight()) {
+			m_root = currentNode->getRight();
+			delete currentNode;
+		}
+		else if (!currentNodeParent && currentNode->hasLeft()) {
+			m_root = currentNode->getLeft();
+			delete currentNode;
+		}
+		else if (currentNodeParent->getLeft() == currentNode && currentNode->hasLeft()) {
+			currentNodeParent->setLeft(currentNode->getLeft());
+			delete currentNode;
+		}
+		else if (currentNodeParent->getLeft() == currentNode && currentNode->hasRight()) {
+			currentNodeParent->setLeft(currentNode->getRight());
+			delete currentNode;
+		}
+		else if (currentNodeParent->getRight() == currentNode && currentNode->hasLeft()) {
+			currentNodeParent->setRight(currentNode->getLeft());
+			delete currentNode;
+		}
+		else if (currentNodeParent->getRight() == currentNode && currentNode->hasRight()) {
+			currentNodeParent->setRight(currentNode->getRight());
+			delete currentNode;
+		}
+	}
 }
 
 template<typename T>
