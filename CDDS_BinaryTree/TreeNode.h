@@ -121,22 +121,24 @@ inline void TreeNode<T>::setLeft(TreeNode<T>* node)
 }
 
 
+//Draw for tree nodes
 template<typename T>
 inline void TreeNode<T>::draw(int x, int y, bool selected)
 {
-	//Creates an array to stoere the string represseination of value
+	//Creates an array to store the string representation of the value
 	static char buffer[10];
 
-	//Converts the value a string and soteres it in the array
+	//Converts the value to a string and stores it in the array
 	sprintf(buffer, "%d", m_value);
 
-	//Draws the circle to represnet the node
-	DrawCircle(x, y, 30, BLACK);
+	//Draws the circle to represent the node
+	DrawCircle(x, y, 30, YELLOW);
 
-	//If the node is current selcevted node change its color
+	//If the the node is the current selected node change its color.
 	if (selected)
 		DrawCircle(x, y, 28, GREEN);
-	DrawCircle(x, y, 28, PINK);
+	else
+		DrawCircle(x, y, 28, PINK);
 
 	//Draw the value of the node inside its circle
 	DrawText(buffer, x - 12, y - 12, 12, WHITE);
