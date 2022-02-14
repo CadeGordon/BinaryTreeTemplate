@@ -118,23 +118,23 @@ inline void BinaryTree<T>::insert(T value)
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
+	
 	TreeNode<T>* nodeToRemove = nullptr; 
 	TreeNode<T>* currentParent = nullptr;
 	TreeNode<T>* currentNode = nullptr;
 
 	if (!findNode(value, nodeToRemove, currentParent))
-		return;
+		return; 
 
 	if (nodeToRemove->hasRight()) 
 	{
 		currentNode = nodeToRemove->getRight();
-		
+
 		if (currentNode->hasLeft()) 
 		{
 			currentParent = currentNode;
-	
 			bool searching = true;
-			
+
 			while (searching) 
 			{
 				if (currentParent->getLeft()->hasLeft()) 
@@ -147,24 +147,68 @@ inline void BinaryTree<T>::remove(T value)
 					searching = false;
 				}
 			}
+
 			nodeToRemove->setData(currentNode->getData());
-			
 			currentParent->setLeft(currentNode->getRight());
-			
 			delete currentNode;
 		}
 		else 
 		{
 			nodeToRemove->setData(currentNode->getData());
+
 			if (currentNode->hasRight()) 
 			{
 				nodeToRemove->setRight(currentNode->getRight());
 			}
 			else nodeToRemove->setRight(nullptr);
-			
 			delete currentNode;
 		}
+	}
+	else 
+	{
+		if (currentParent) 
+		{
+			if (nodeToRemove->hasLeft()) 
+			{
+				currentNode = nodeToRemove->getLeft();
+				
+				if (currentParent->getLeft() == nodeToRemove)
+					currentParent->setLeft(currentNode);
+				
+				else if (currentParent->getRight() == nodeToRemove)
+					currentParent->setRight(currentNode);
 
+				delete nodeToRemove;
+				return;
+			}
+			else 
+			{
+				if (currentParent->getLeft() == nodeToRemove)
+					currentParent->setLeft(nullptr);
+				else if (currentParent->getRight() == nodeToRemove)
+					currentParent->setRight(nullptr);
+				
+				delete nodeToRemove;
+			}
+		}
+		else 
+		{
+			if (nodeToRemove->hasLeft()) 
+			{
+				currentNode = nodeToRemove->getLeft();
+				
+				m_root = currentNode;
+				
+				delete nodeToRemove;
+				return;
+			}
+			else 
+			{
+				delete nodeToRemove;
+				m_root = nullptr;
+			}
+		}
+		delete currentNode;
 	}
 }
 
