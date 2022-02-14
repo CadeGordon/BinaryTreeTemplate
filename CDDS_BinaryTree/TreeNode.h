@@ -136,7 +136,7 @@ inline void TreeNode<T>::draw(int x, int y, bool selected)
 
 	//If the the node is the current selected node change its color.
 	if (selected)
-		DrawCircle(x, y, 28, GREEN);
+		DrawCircle(x, y, 28, BLACK);
 	else
 		DrawCircle(x, y, 28, PINK);
 
