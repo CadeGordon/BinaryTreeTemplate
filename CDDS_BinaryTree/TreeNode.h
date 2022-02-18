@@ -4,8 +4,11 @@ template<typename T>
 class TreeNode
 {
 public:
+	// Creates a basic tree node with no data, no left, and no right.
 	TreeNode() {};
+	// Creates a tree node that holds the given value
 	TreeNode(T value);
+	// Is called upon the deletion of a tree node.
 	~TreeNode() {};
 
 	/// <summary>

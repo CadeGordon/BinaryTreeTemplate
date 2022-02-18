@@ -52,6 +52,7 @@ private:
 
 #endif
 
+
 template<typename T>
 inline BinaryTree<T>::BinaryTree()
 {
