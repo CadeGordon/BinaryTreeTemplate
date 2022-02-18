@@ -74,29 +74,37 @@ inline bool BinaryTree<T>::isEmpty() const
 template<typename T>
 inline void BinaryTree<T>::insert(T value)
 {
+	//Temp nodes for iterating through the binary tree
 	TreeNode<T>* newNode = new TreeNode<T>(value);
 	TreeNode<T>* tempNode = m_root;
 	bool nodeInserted = false;
 
+	//if the root isn't set
 	if (m_root == nullptr)
 	{
+		//set the root to be the new node
 		m_root = newNode;
 		return;
 	}
 
+	//while the node isn't inserted into the tree
 	while (!nodeInserted)
 	{
+		//if the value is less then the current nodes data
 		if (value < tempNode->getData())
 		{
+			//if the current node has a left
 			if (tempNode->getLeft())
+				//set the current node to be the current nodes left
 				tempNode = tempNode->getLeft();
 			else
 			{
+				//set the temp nodes left to be the new node
 				tempNode->setLeft(newNode);
 				nodeInserted = true;
 			}
 		}
-
+		//if the value is equal to the data then return
 		else if (value > tempNode->getData())
 		{
 			if (tempNode->getRight())
@@ -118,14 +126,18 @@ inline void BinaryTree<T>::insert(T value)
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
-	
+	//the node to remove is set useing the value given
 	TreeNode<T>* nodeToRemove = nullptr; 
+	//the node parent will be set to the current nodes parent
 	TreeNode<T>* currentParent = nullptr;
+	//the current node for iterating
 	TreeNode<T>* currentNode = nullptr;
 
+	//if the node cannot be found then return
 	if (!findNode(value, nodeToRemove, currentParent))
 		return; 
 
+	
 	if (nodeToRemove->hasRight()) 
 	{
 		currentNode = nodeToRemove->getRight();
@@ -215,17 +227,22 @@ inline void BinaryTree<T>::remove(T value)
 template<typename T>
 inline TreeNode<T>* BinaryTree<T>::find(T value)
 {
+	//a node to iterate through the tree
 	bool nodeFound = false;
 	TreeNode<T>* currentNode = m_root;
 
+	//while the node has not been found
 	while (!nodeFound)
 	{
+		//if the value is less than the current node
 		if (value < currentNode->getData())
 		{
+			//if the current node has a left
 			if (currentNode->getLeft())
+				//set the current node to be the current nodes left
 				currentNode = currentNode->getLeft();
 		}
-
+		//if the value is greater than the current node
 		else if (value > currentNode->getData())
 		{
 			if (currentNode->getRight())
